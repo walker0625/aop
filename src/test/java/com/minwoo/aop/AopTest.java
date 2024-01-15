@@ -2,10 +2,7 @@ package com.minwoo.aop;
 
 import com.minwoo.aop.order.OrderRepository;
 import com.minwoo.aop.order.OrderService;
-import com.minwoo.aop.order.aop.AspectV3;
-import com.minwoo.aop.order.aop.AspectV4;
-import com.minwoo.aop.order.aop.AspectV5;
-import com.minwoo.aop.order.aop.AspectV6;
+import com.minwoo.aop.aspect.AspectV6;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;

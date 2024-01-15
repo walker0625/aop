@@ -1,4 +1,4 @@
-package com.minwoo.aop.order.aop;
+package com.minwoo.aop.aspect;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -12,7 +12,7 @@ public class AspectV5 {
     @Aspect
     @Order(2) // Aspect 단위로 Order 적용이 가능하여 class 형태로 분리(bean도 각각 등록해야 함)
     public static class LogAspect {
-        @Around("com.minwoo.aop.order.aop.Pointcuts.allOrder()")
+        @Around("com.minwoo.aop.aspect.Pointcuts.allOrder()")
         public Object doLog(ProceedingJoinPoint joinPoint) throws Throwable{
             log.info("[log] {}", joinPoint.getSignature());
             return joinPoint.proceed();
@@ -22,7 +22,7 @@ public class AspectV5 {
     @Aspect
     @Order(1)
     public static class TxAspect {
-        @Around("com.minwoo.aop.order.aop.Pointcuts.orderAndService()")
+        @Around("com.minwoo.aop.aspect.Pointcuts.orderAndService()")
         public Object doTransaction(ProceedingJoinPoint joinPoint) throws Throwable{
 
             try {

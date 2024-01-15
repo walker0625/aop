@@ -1,4 +1,4 @@
-package com.minwoo.aop.order.aop;
+package com.minwoo.aop.aspect;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
@@ -38,18 +38,18 @@ public class AspectV6 {
 
     }
 
-    @Before("com.minwoo.aop.order.aop.Pointcuts.orderAndService()")
+    @Before("com.minwoo.aop.aspect.Pointcuts.orderAndService()")
     public void doBefore(JoinPoint joinPoint) {
         log.info("[@Before] {}", joinPoint.getSignature());
     }
 
-    @AfterThrowing(value = "com.minwoo.aop.order.aop.Pointcuts.orderAndService()",
+    @AfterThrowing(value = "com.minwoo.aop.aspect.Pointcuts.orderAndService()",
                    throwing = "ex")
     public void doThrowing(JoinPoint joinPoint, Exception ex){
         log.info("[@AfterThrowing] {} ex = {}", joinPoint.getSignature(), ex.getMessage());
     }
 
-    @AfterReturning(value = "com.minwoo.aop.order.aop.Pointcuts.orderAndService()",
+    @AfterReturning(value = "com.minwoo.aop.aspect.Pointcuts.orderAndService()",
             returning = "result")
     // 변환은 불가(result 자체가 고정 타입 - 파라미터에서 다른 타입으로 받으면 해당 pointcut 자체가 미동작)
     public void doReturn(JoinPoint joinPoint, String result) { // returning = "result"와 일치
@@ -59,7 +59,7 @@ public class AspectV6 {
         log.info("[@AfterReturning] {} return = {}", joinPoint.getSignature(), result);
     }
 
-    @After("com.minwoo.aop.order.aop.Pointcuts.orderAndService()")
+    @After("com.minwoo.aop.aspect.Pointcuts.orderAndService()")
     public void doAfter(JoinPoint joinPoint) {
         log.info("[@After] {}", joinPoint.getSignature());
     }

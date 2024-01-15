@@ -1,4 +1,4 @@
-package com.minwoo.aop.order.aop;
+package com.minwoo.aop.aspect;
 
 import org.aspectj.lang.annotation.Pointcut;
 
