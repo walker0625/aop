@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Import;
 @SpringBootTest
 //@Import({AspectV5.LogAspect.class, AspectV5.TxAspect.class}) // bean으로 등록됨
 @Import(AspectV6.class)
-public class AopTest {
+public class AspectTest {
 
     @Autowired
     OrderService orderService;
