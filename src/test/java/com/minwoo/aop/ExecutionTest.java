@@ -66,7 +66,46 @@ public class ExecutionTest {
 
     @Test
     void packageMatch3() {
-        pointcut.setExpression("execution(* com.minwoo.aop..*.*(..))");
+        pointcut.setExpression("execution(* com.minwoo.aop..*.*(..))"); // . : 정확히 해당 패키지, .. : 해당 패키지 포함 하위 패키지까지
+        assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
+    }
+
+    // 부모 타입(MemberService)을 지정해도 자식(MemberServiceImpl)까지 포인트컷 지정됨
+    @Test
+    void superTypeMatch() {
+        pointcut.setExpression("execution(* com.minwoo.aop.member.MemberService.*(..))");
+        assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
+    }
+
+    // 단 부모 타입에서 선언된 메소드까지만 적용됨(internal 제외)
+    @Test
+    void superTypeInternalMatch() throws NoSuchMethodException {
+        pointcut.setExpression("execution(* com.minwoo.aop.member.MemberService.*(..))");
+        Method internal = MemberServiceImpl.class.getMethod("internal", String.class);
+        assertThat(pointcut.matches(internal, MemberServiceImpl.class)).isFalse();
+    }
+
+    @Test
+    void noArgsMatch() {
+        pointcut.setExpression("execution(* *())");
+        assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isFalse();
+    }
+
+    @Test
+    void allOneArgsMatch() {
+        pointcut.setExpression("execution(* *(*))"); // 개수는 1개로 한정
+        assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
+    }
+
+    @Test
+    void allMultiArgsMatch() {
+        pointcut.setExpression("execution(* *(..))"); // 개수 n개 가능
+        assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
+    }
+
+    @Test
+    void startStringArgsMatch() {
+        pointcut.setExpression("execution(* *(String, ..))");
         assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
     }
 
