@@ -1,5 +1,6 @@
 package com.minwoo.aop.warn;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,14 +8,11 @@ import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class InternalCallLazy {
 
+    // InternalCallLazy 정보를 가지고만 있고 생성할 때 사용하지 않아 순환참조 발생하지 않음
     private final ObjectProvider<InternalCallLazy> callLazyProvider;
-
-    // InternalCallLazy 생성 이후에 주입
-    public InternalCallLazy(ObjectProvider<InternalCallLazy> callLazyProvider) {
-        this.callLazyProvider = callLazyProvider;
-    }
 
     public void externalCall() {
         log.info("external call");
