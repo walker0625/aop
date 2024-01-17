@@ -31,6 +31,7 @@ public class BeanTest {
             log.info("[bean] {}", joinPoint.getSignature());
             return joinPoint.proceed();
         }
+
     }
 
 }
