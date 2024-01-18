@@ -1,11 +1,16 @@
-package com.minwoo.aop.warn;
+package com.minwoo.aop.warn.internal;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
-public class InternalService {
+public class InternalCall {
+
+    public void externalCall() {
+        log.info("external call");
+        internalCall();
+    }
 
     public void internalCall() {
         log.info("internal Call");

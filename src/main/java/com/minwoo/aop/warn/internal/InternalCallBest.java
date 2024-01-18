@@ -1,4 +1,4 @@
-package com.minwoo.aop.warn;
+package com.minwoo.aop.warn.internal;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
